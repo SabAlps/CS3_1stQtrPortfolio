@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+   <h2> Q1 2nd Graded Exercise submitted by Sab Alpasan of 9 Sodium :3 </h2>
+
+   <!-- Enter your HTML tags below  but before the opening script tag -->
+     <p>Guess the Number:** </p> 
+
+    <p>The number 1 to 100 </p>
+    <label> Enter your guess: </label>
+    <input id="in1" type ="text" placeholder="Number"> <br> 
+  <br>
+    <button onclick="checkIt()">Check It!</button> <br>
+<br>
+    <label> Result: </label>
+<p id=output></p>
+    <script>
+       var dNumber = Math.floor(Math.random() * 100) + 1; 
+
+        function checkIt() {
+            var guess = parseInt(document.getElementById("in1").value);
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                alert("PLEASE enter a valid number between 1 and 100 lil bro !!!");
+                return;
+            }
+
+            if (guess === dNumber) {
+                output.textContent = "Correct! ";
+            } else if (guess < dNumber) {
+                output.textContent = "Too low! Try again.";
+            } else {
+                output.textContent = "Too high! Try again.";
+            }
+
+            document.getElementById("in1").value = ""; 
+        }
+    </script>
+    <footer> References: <br>
+        CodingNepal. (2024, November 7). Number Guessing Game in HTML CSS & JavaScript. CodingNepal. https://www.codingnepalweb.com/create-game-html-css-javascript/<br>
+        Number Guessing game in javascript. (n.d.). Stack Overflow. https://stackoverflow.com/questions/71934739/number-guessing-game-in-javascript<br>
+        CodewithFaraz. (2024, April 1). Build a Number Guessing Game using HTML, CSS, and JavaScript | Source Code. CodeCodewithFaraz - Python, C, C++, React, Java, JavaScript, Web Development Projects, Blogs & Front-End Components. https://www.codewithfaraz.com/content/371/build-a-number-guessing-game-using-html-css-and-javascript-source-code
+    </footer>
+
+</body>
+
+</html>
