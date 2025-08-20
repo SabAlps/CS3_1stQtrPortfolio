@@ -24,13 +24,13 @@
             var serviceCharge = parseFloat(document.getElementById("in3").value);
 
              if (isNaN(mealPrice) || isNaN(tip) || isNaN(serviceCharge)) {
-                alert("Please enter valid numbers lil bro !!!!"); // removed extra ')'
+                alert("Please enter valid numbers lil bro !!!!"); 
                 return;
             }
 
             var total = ((mealPrice + tip + (serviceCharge / 100 * mealPrice)).toFixed(2));
 
-            // FIXED this line:
+            
             document.getElementById("output").textContent = `Total Meal: ${total} :D`;
 
         }
