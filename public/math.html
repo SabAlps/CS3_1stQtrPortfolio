@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Square‑Root & Semicircle Functions — Interactive Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#fbfbfc;--card:#ffffff;--muted:#6b7280;--accent:#0f766e;--border:#e6e9ee}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1.5;margin:0;background:var(--bg);color:#0f172a}
+    header{background:linear-gradient(90deg,#ecfeff,white);border-bottom:1px solid var(--border);padding:22px 28px}
+    .wrap{max-width:1100px;margin:24px auto;padding:0 18px}
+    h1{font-size:1.6rem;margin:0 0 6px}
+    p.lead{color:var(--muted);margin:0 0 14px}
+    .layout{display:grid;grid-template-columns:260px 1fr;gap:20px}
+    nav{background:var(--card);border:1px solid var(--border);padding:16px;border-radius:10px;height:fit-content}
+    nav a{display:block;color:#0f172a;text-decoration:none;padding:6px 8px;border-radius:6px}
+    nav a:hover{background:#f1f5f9}
+    article{background:var(--card);border:1px solid var(--border);padding:22px;border-radius:10px}
+    section{margin-bottom:20px}
+
+    .card{background:#fff;border:1px solid var(--border);padding:14px;border-radius:8px}
+    .example{background:#fff6f3;border-left:4px solid #f97316;padding:12px;border-radius:6px}
+
+    pre{background:#0b1220;color:#dff3ea;padding:12px;border-radius:6px;overflow:auto}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, monospace;font-size:0.95em}
+
+    /* interactive area */
+    .row{display:flex;gap:16px;align-items:center}
+    .controls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+    label{font-size:0.9rem;color:var(--muted)}
+    input[type=range]{width:100%}
+    canvas{background:linear-gradient(180deg,#ffffff,#f7f9fc);border:1px solid var(--border);border-radius:8px}
+
+    footer{color:var(--muted);font-size:0.9rem;padding:18px 28px;text-align:center}
+
+    @media (max-width:880px){.layout{grid-template-columns:1fr}nav{order:2}article{order:1}}
+  </style>
+  <script>
+    window.MathJax = {tex:{inlineMath:[['$','$'],['\\(','\\)']]}};
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Square‑Root & Semicircle Functions</h1>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="layout">
+      <nav>
+        <strong>Contents</strong>
+        <a href="#sqrt">1. Square‑root function</a>
+        <a href="#sqrt-transform">• Transformations</a>
+        <a href="#sqrt-example">• Worked example</a>
+        <hr/>
+        <a href="#semi">2. Semicircle function</a>
+        <a href="#semi-transform">• Shifts & radius</a>
+        <a href="#semi-example">• Worked example</a>
+        <hr/>
+        <a href="#compare">3. Comparison & notes</a>
+        <a href="#interactive">4. Interactive plots</a>
+      </nav>
+
+      <article>
+        <section id="sqrt">
+          <h2>1. The square‑root function</h2>
+          <p>The parent square‑root function is $y=\sqrt{x}$. It is defined for $x\ge0$, and its outputs are non‑negative ($y\ge0$). Graphically it starts at the origin $(0,0)$ and increases slowly as $x$ grows.</p>
+
+          <div class="card">
+            <strong>Parent form</strong>
+            <p>$y=\sqrt{x}$</p>
+            <p><strong>Domain:</strong> $[0,\infty)$ &nbsp; <strong>Range:</strong> $[0,\infty)$</p>
+            <p><strong>Key fact:</strong> It is the inverse of $y=x^2$ restricted to $x\ge0$.</p>
+          </div>
+        </section>
+
+        <section id="sqrt-transform">
+          <h3>Transformations</h3>
+          <p>General transformed form:</p>
+          <pre><code>y = a \sqrt{b(x-h)} + k</code></pre>
+          <ul>
+            <li><code>h</code>: horizontal shift (right if $h>0$)</li>
+            <li><code>k</code>: vertical shift (up if $k>0$)</li>
+            <li><code>a</code>: vertical stretch / reflection when negative</li>
+            <li><code>b</code>: horizontal stretch / compression (inside the root)</li>
+          </ul>
+
+          <div class="example">
+            <strong>Quick example:</strong> $y=\sqrt{x-2}+3$ has domain $[2,\infty)$ and range $[3,\infty)$. The graph starts at $(2,3)$.
+          </div>
+        </section>
+
+        <section id="sqrt-example">
+          <h3>Worked example</h3>
+          <p>Sketch and state domain/range of $y=2\sqrt{3(x+1)}-1$.</p>
+          <ol>
+            <li>Radicand: $3(x+1)\ge0 \Rightarrow x+1\ge0 \Rightarrow x\ge-1$ &nbsp;→ domain $[-1,\infty)$.</li>
+            <li>Start point: plug $x=-1$ → $y=2\sqrt{0}-1=-1$ → point $(-1,-1)$.</li>
+            <li>Since $a=2>0$, graph rises to the right; range is $[-1,\infty)$.</li>
+          </ol>
+        </section>
+
+        <section id="semi">
+          <h2>2. The semicircle function</h2>
+          <p>From the circle $ (x-h)^2 + (y-k)^2 = r^2 $, solving for $y$ gives two choices:
+          $y = k \pm \sqrt{r^2 - (x-h)^2}$. Choosing the $+$ sign gives the top semicircle (a function). Choosing $-$ gives the bottom semicircle (also a function).</p>
+
+          <div class="card">
+            <strong>Parent (top half)</strong>
+            <p>$y = k + \sqrt{r^2 - (x-h)^2$}</p>
+            <p><strong>Domain:</strong> $[h-r,\; h+r]$ &nbsp; <strong>Range (top):</strong> $[k,\; k+r]$</p>
+          </div>
+        </section>
+
+        <section id="semi-transform">
+          <h3>Shifts & radius</h3>
+          <p>The semicircle is bounded horizontally by the circle's diameter; it is a finite, symmetric arc. If the center is $(h,k)$ and radius $r$ then:</p>
+          <ul>
+            <li>Domain: $h-r \le x \le h+r$</li>
+            <li>Top semicircle range: $k \le y \le k+r$</li>
+            <li>Bottom semicircle range: $k-r \le y \le k$</li>
+          </ul>
+        </section>
+
+        <section id="semi-example">
+          <h3>Worked example</h3>
+          <p>Let $y=\sqrt{25-x^2}$. This is the top semicircle with radius 5 centered at the origin.</p>
+          <p>Domain: $[-5,5]$, Range: $[0,5]$; top point at $(0,5)$ and endpoints $(-5,0)$ and $(5,0)$.</p>
+        </section>
+
+        <section id="compare">
+          <h2>3. Comparison & key differences</h2>
+          <ul>
+            <li>Both use square roots: watch the radicand for domain restrictions.</li>
+            <li>Square‑root parent ($\sqrt{x}$) is unbounded to the right; semicircles are bounded (finite arc).</li>
+            <li>Semicircles come from solving a circle for $y$; choose a sign to keep single $y$ per $x$ (function).</li>
+          </ul>
+        </section>
+
+        <section id="interactive">
+          <h2>4. Interactive plots</h2>
+          <p>Use the controls to visualize the parent and transformed functions. The coordinate grid is shown; hover points show coordinates.</p>
+
+          <div class="row">
+            <div style="flex:1">
+              <canvas id="plot" width="720" height="420"></canvas>
+            </div>
+            <div style="width:320px">
+              <div class="card">
+                <strong>Square‑root controls</strong>
+                <div class="controls">
+                  <div>
+                    <label>h (horizontal shift) <span id="hVal">0</span></label>
+                    <input id="h" type="range" min="-6" max="6" step="0.1" value="0">
+                  </div>
+                  <div>
+                    <label>k (vertical shift) <span id="kVal">0</span></label>
+                    <input id="k" type="range" min="-6" max="6" step="0.1" value="0">
+                  </div>
+                  <div>
+                    <label>a (vertical scale) <span id="aVal">1</span></label>
+                    <input id="a" type="range" min="-3" max="3" step="0.1" value="1">
+                  </div>
+                  <div>
+                    <label>b (inside scale) <span id="bVal">1</span></label>
+                    <input id="b" type="range" min="0.1" max="4" step="0.1" value="1">
+                  </div>
+                </div>
+                <hr>
+                <strong>Semicircle controls</strong>
+                <div class="controls">
+                  <div>
+                    <label>h (center x) <span id="hcVal">0</span></label>
+                    <input id="hc" type="range" min="-6" max="6" step="0.1" value="0">
+                  </div>
+                  <div>
+                    <label>k (center y) <span id="kcVal">0</span></label>
+                    <input id="kc" type="range" min="-6" max="6" step="0.1" value="0">
+                  </div>
+                  <div>
+                    <label>r (radius) <span id="rVal">3</span></label>
+                    <input id="r" type="range" min="0.5" max="6" step="0.1" value="3">
+                  </div>
+                  <div>
+                    <label>Top / Bottom</label>
+                    <select id="which">
+                      <option value="top">Top semicircle</option>
+                      <option value="bottom">Bottom semicircle</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px" class="card">
+                <strong>Equations</strong>
+                <div id="eqn"></div>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <section>
+          <h3>Exercises</h3>
+          <ol>
+            <li>State domain and range for $y=\sqrt{4-x}+2$.</li>
+            <li>Sketch $y=-\sqrt{9-(x-1)^2}+1$ and identify center and radius.</li>
+            <li>Describe how the graph of $y=3\sqrt{\tfrac{1}{4}(x+2)}-2$ compares to $y=\sqrt{x}$.</li>
+          </ol>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    Created as an interactive summary. Edit the controls and inspect how domain and range change.
+  </footer>
+
+  <script>
+    // Simple plotting utilities
+    const canvas = document.getElementById('plot');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W/2, cy = H/2; // pixel center
+    const scale = 36; // pixels per unit
+
+    function toPxX(x){return cx + x*scale}
+    function toPxY(y){return cy - y*scale}
+
+    function drawGrid(){
+      ctx.clearRect(0,0,W,H);
+      // background
+      ctx.fillStyle='#ffffff';
+      ctx.fillRect(0,0,W,H);
+      // grid lines
+      ctx.strokeStyle='#eef2f7'; ctx.lineWidth=1;
+      for(let x=-10;x<=10;x++){
+        ctx.beginPath();ctx.moveTo(toPxX(x),0);ctx.lineTo(toPxX(x),H);ctx.stroke()
+      }
+      for(let y=-7;y<=7;y++){
+        ctx.beginPath();ctx.moveTo(0,toPxY(y));ctx.lineTo(W,toPxY(y));ctx.stroke()
+      }
+      // axes
+      ctx.strokeStyle='#94a3b8';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
+      // ticks
+      ctx.fillStyle='#0f172a';ctx.font='12px Inter';
+      for(let x=-10;x<=10;x+=1){ctx.fillText(x,toPxX(x)+4,cy+12)}
+      for(let y=-6;y<=6;y+=1){if(y!==0)ctx.fillText(y,cx+6,toPxY(y)-4)}
+    }
+
+    function plotSqrt(a,b,h,k){
+      ctx.strokeStyle='#0f766e';ctx.lineWidth=2.5;ctx.beginPath();
+      const start = Math.max(-10, h);
+      // we'll sample x from h to 10
+      let started=false;
+      for(let px=h;px<=10;px+=0.02){
+        const rad = b*(px - h);
+        if(rad < 0) continue;
+        const y = a*Math.sqrt(rad) + k;
+        const xP = toPxX(px), yP = toPxY(y);
+        if(!started){ctx.moveTo(xP,yP);started=true}else ctx.lineTo(xP,yP);
+      }
+      ctx.stroke();
+    }
+
+    function plotSemicircle(hc,kc,r,which){
+      ctx.strokeStyle='#be185d';ctx.lineWidth=2.5;ctx.beginPath();
+      const left = hc - r, right = hc + r;
+      let started=false;
+      for(let px=left; px<=right; px+=0.01){
+        const inner = r*r - (px-hc)*(px-hc);
+        if(inner<0) continue;
+        const root = Math.sqrt(inner);
+        const y = (which==='top') ? kc + root : kc - root;
+        const xP = toPxX(px), yP = toPxY(y);
+        if(!started){ctx.moveTo(xP,yP); started=true}else ctx.lineTo(xP,yP);
+      }
+      ctx.stroke();
+    }
+
+    function update(){
+      drawGrid();
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const h = parseFloat(document.getElementById('h').value);
+      const k = parseFloat(document.getElementById('k').value);
+      const hc = parseFloat(document.getElementById('hc').value);
+      const kc = parseFloat(document.getElementById('kc').value);
+      const r = parseFloat(document.getElementById('r').value);
+      const which = document.getElementById('which').value;
+
+      // draw transformed sqrt (note: we interpret sqrt(b(x-h)) with b multiplying inside)
+      plotSqrt(a,b,h,k);
+      plotSemicircle(hc,kc,r,which);
+
+      // update labels
+      document.getElementById('hVal').innerText = h;
+      document.getElementById('kVal').innerText = k;
+      document.getElementById('aVal').innerText = a;
+      document.getElementById('bVal').innerText = b;
+      document.getElementById('hcVal').innerText = hc;
+      document.getElementById('kcVal').innerText = kc;
+      document.getElementById('rVal').innerText = r;
+
+      // equation display
+      const eqnDiv = document.getElementById('eqn');
+      const sqrtEq = `y = ${a} \;\sqrt{ ${b}(x ${h>=0?'-':'+'} ${Math.abs(h)}) } ${k>=0?'+':'-'} ${Math.abs(k)}`;
+      const semiEq = `y = ${kc} ${which==='top'?'+':'-'} \sqrt{ ${r}^2 - (x ${hc>=0?'-':'+'} ${Math.abs(hc)})^2 }`;
+      eqnDiv.innerHTML = `\\(${sqrtEq}\\)<br>\\(${semiEq}\\)`;
+      MathJax.typesetPromise();
+    }
+
+    // attach events
+    ['h','k','a','b','hc','kc','r','which'].forEach(id=>{
+      const el = document.getElementById(id);
+      el.addEventListener('input', update);
+    });
+
+    // initial draw
+    update();
+  </script>
+</body>
+</html>
